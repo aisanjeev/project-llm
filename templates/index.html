@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Analysis UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-gray-100 to-gray-300 min-h-screen flex items-center justify-center p-5">
+    <div class="container-fluid mx-auto grid grid-cols-3 gap-6 p-6 bg-white shadow-xl rounded-lg">
+        <!-- Left Column -->
+        <div class="col-span-1 bg-gray-50 p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Project Gutenberg</h2>
+            <input type="text" id="bookId" placeholder="Enter Project ID" 
+                class="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-400 mb-3">
+            <button onclick="fetchBook()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg w-full transition">Enter</button>
+            
+            <input type="text" id="search" placeholder="Search books..." 
+                class="border border-gray-300 p-3 w-full rounded-lg focus:ring-2 focus:ring-gray-400 mt-4 mb-3">
+            <button onclick="searchBook()" class="bg-gray-600 hover:bg-gray-700 text-white font-medium px-4 py-2 rounded-lg w-full transition">Search</button>
+            
+            <h3 class="mt-6 text-lg font-semibold text-gray-700">Previously Accessed Books</h3>
+            <ul id="bookList" class="h-60 overflow-auto border border-gray-200 p-3 rounded-lg bg-gray-50 mt-2">
+                <!-- List of books dynamically added here -->
+            </ul>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="col-span-2 bg-gray-50 p-6 rounded-lg shadow-md">
+            <div class="flex space-x-3 mb-6">
+                <button onclick="showText()" class="bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg transition">Book Text</button>
+                <button onclick="analyzeText('characters')" class="bg-purple-600 hover:bg-purple-700 text-white font-medium px-4 py-2 rounded-lg transition">Characters</button>
+                <button onclick="analyzeText('language')" class="bg-orange-600 hover:bg-orange-700 text-white font-medium px-4 py-2 rounded-lg transition">Language</button>
+                <button onclick="analyzeText('sentiment')" class="bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-lg transition">Sentiment</button>
+                <button onclick="analyzeText('summary')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-4 py-2 rounded-lg transition">Summary</button>
+            </div>
+            
+            <div id="displayArea" class="border border-gray-300 bg-white p-5 h-96 overflow-auto rounded-lg shadow-inner">
+                <p class="text-gray-700">Book text will be displayed here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load book list on page load
+        window.onload = () => addToBookList();
+
+        async function fetchBook() {
+            const bookId = document.getElementById('bookId').value.trim();
+            if (!bookId) return alert('Please enter a Book ID');
+
+            document.getElementById('displayArea').innerHTML = `<p class='text-gray-700'>Fetching book data...</p>`;
+
+            try {
+                const response = await fetch(`/fetch_book?bookId=${bookId}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('displayArea').innerHTML = `<pre class='text-gray-700'>${data.content}</pre>`;
+                    addToBookList();  // Refresh book list after adding new book
+                } else {
+                    document.getElementById('displayArea').innerHTML = `<p class='text-red-600'>${data.error}</p>`;
+                }
+            } catch (error) {
+                document.getElementById('displayArea').innerHTML = `<p class='text-red-600'>Error fetching book data</p>`;
+            }
+        }
+
+        async function addToBookList() {
+            const bookList = document.getElementById('bookList');
+            bookList.innerHTML = ""; // Clear existing list before adding
+
+            try {
+                // Fetch all accessed books from API
+                const response = await fetch(`/get_all_ebooks`);
+                if (!response.ok) throw new Error("Failed to fetch book data");
+
+                const bookData = await response.json(); // Expecting a list of JSON objects
+
+                // Extract all "Book_id" values from the list
+                const bookIds = bookData
+                    .filter(item => item.Book_id) // Ensure the object has "Book_id"
+                    .map(item => item.Book_id);
+
+                bookIds.forEach(id => {
+                    // Create list item
+                    const li = document.createElement('li');
+                    li.className = "p-2 border-b border-gray-300 text-blue-600 cursor-pointer hover:underline";
+                    li.innerText = `Book ID: ${id}`;
+
+                    // On click, show book data in right panel instead of opening a new page
+                    li.onclick = () => fetchBookById(id);
+
+                    // Append to list
+                    bookList.appendChild(li);
+                });
+            } catch (error) {
+                console.error("Error fetching book data:", error);
+            }
+        }
+
+        async function fetchBookById(bookId) {
+            document.getElementById('displayArea').innerHTML = `<p class='text-gray-700'>Fetching book data...</p>`;
+
+            try {
+                const response = await fetch(`/fetch_book?bookId=${bookId}`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('displayArea').innerHTML = `<pre class='text-gray-700'>${data.content}</pre>`;
+                } else {
+                    document.getElementById('displayArea').innerHTML = `<p class='text-red-600'>${data.error}</p>`;
+                }
+            } catch (error) {
+                document.getElementById('displayArea').innerHTML = `<p class='text-red-600'>Error fetching book data</p>`;
+            }
+        }
+
+        async function searchBook() {
+            const query = document.getElementById('search').value.trim();
+            if (!query) return alert('Enter a search term');
+
+            try {
+                const response = await fetch(`/search?query=${query}`);
+                const data = await response.json();
+                document.getElementById('displayArea').innerHTML = `<pre class='text-gray-700'>${(data.content)}</pre>`;
+            } catch (error) {
+                document.getElementById('displayArea').innerHTML = `<p class='text-red-600'>Error searching books</p>`;
+            }
+        }
+
+        function showText() {
+            document.getElementById('displayArea').innerHTML = '<p class="text-gray-700">Displaying full book text...</p>';
+        }
+
+        async function analyzeText(type) {
+            const bookId = document.getElementById('bookId').value.trim();
+            if (!bookId) return alert("Enter a valid Book ID!");
+
+            document.getElementById('displayArea').innerHTML = `<p class='text-gray-700'>Analyzing book for ${type}...</p>`;
+
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ bookId, type })
+                });
+                const data = await response.json();
+
+                document.getElementById('displayArea').innerHTML = `<p class='text-gray-700'>${data.result}</p>`;
+            } catch (error) {
+                document.getElementById('displayArea').innerHTML = `<p class='text-red-600'>Error in analysis</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
