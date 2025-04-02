@@ -39,6 +39,10 @@ def analyze_text():
     data = request.get_json()
     book_id = data.get("bookId")
     analysis_type = data.get("type")
+    if analysis_type=="meta":
+        status, meta_data_raw = book_id_exists(book_id)
+        meta_data = json_to_html_table(json.loads(meta_data_raw))
+        return jsonify({"result": meta_data})
     ifexits, record = book_id_exists_in_analysis(book_id)
     if not book_id or not analysis_type:
         return jsonify({"error": "Book ID and analysis type are required"}), 400

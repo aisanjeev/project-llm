@@ -234,7 +234,7 @@ def book_id_exists(book_id):
     row = cursor.fetchone()
     conn.close()
     
-    return (row is not None, row[3] if row else None)
+    return (row is not None, row[1] if row else None)
 def book_id_exists_in_analysis(book_id):
     """
     Check if a book with the given ID exists in the database.
