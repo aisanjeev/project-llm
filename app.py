@@ -60,4 +60,4 @@ def get_all_books_html():
     return jsonify(books_data)
 
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5005, host=0.0.0.0)

@@ -261,3 +261,9 @@ None
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 116-990-189
+ * Detected change in '/home/server/workspace/project/app.py', reloading
+ * Restarting with stat
+  File "/home/server/workspace/project/app.py", line 63
+    app.run(debug=True, port=5005, host=0.0.0.0)
+                                        ^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
