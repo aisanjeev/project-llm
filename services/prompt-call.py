@@ -1,19 +1,13 @@
-import os
-
+from .operations import *
 from groq import Groq
-
-client = Groq(
-    api_key="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",
-)
-
-chat_completion = client.chat.completions.create(
-    messages=[
-        {
-            "role": "user",
-            "content": "Explain the importance of fast language models",
-        }
-    ],
-    model="llama-3.3-70b-versatile",
-)
-
-print(chat_completion.choices[0].message.content)
+def process_analysis(file_path,):
+    text = read_txt_file(file_path)
+    chunk = chunk_text(text,max_length=5000)
+    selected_chunks = select_chunks(chunk, num_samples=20)
+    client = Groq(
+        api_key="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",
+        )
+    summary = process_raw_analysis(client, selected_chunks)
+    merged_output = merge_responses(summary)
+    raw_json_output = process_final_analysis(merged_output, client)
+    final_analysis = extract_json(raw_json_output)

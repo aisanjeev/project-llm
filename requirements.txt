@@ -2,3 +2,4 @@ groq==0.20.0
 flask
 beautifulsoup4
 requests 
+python-dotenv

@@ -27,12 +27,10 @@
         
         <!-- Right Column -->
         <div class="col-span-2 bg-gray-50 p-6 rounded-lg shadow-md">
+            <h2 id="ebookTitle" class="text-xl font-bold text-gray-800 mb-4">Selected Ebook: 123.txt</h2>
             <div class="flex space-x-3 mb-6">
                 <button onclick="showText()" class="bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg transition">Book Text</button>
-                <button onclick="analyzeText('characters')" class="bg-purple-600 hover:bg-purple-700 text-white font-medium px-4 py-2 rounded-lg transition">Characters</button>
-                <button onclick="analyzeText('language')" class="bg-orange-600 hover:bg-orange-700 text-white font-medium px-4 py-2 rounded-lg transition">Language</button>
-                <button onclick="analyzeText('sentiment')" class="bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-lg transition">Sentiment</button>
-                <button onclick="analyzeText('summary')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-4 py-2 rounded-lg transition">Summary</button>
+                <button onclick="analyzeText('analysis')" class="bg-purple-600 hover:bg-purple-700 text-white font-medium px-4 py-2 rounded-lg transition">Get Ebook Analysis</button>
             </div>
             
             <div id="displayArea" class="border border-gray-300 bg-white p-5 h-96 overflow-auto rounded-lg shadow-inner">
@@ -42,11 +40,16 @@
     </div>
 
     <script>
+        let bookId = null;
         // Load book list on page load
         window.onload = () => addToBookList();
-
+        async function updateEbookTitle(filename) {
+            document.getElementById("ebookTitle").textContent = `Selected Ebook: ${filename}.txt`;
+        }
         async function fetchBook() {
-            const bookId = document.getElementById('bookId').value.trim();
+            bookId = document.getElementById('bookId').value.trim();
+            updateEbookTitle(bookId);
+            sessionStorage.setItem('bookId', bookId);
             if (!bookId) return alert('Please enter a Book ID');
 
             document.getElementById('displayArea').innerHTML = `<p class='text-gray-700'>Fetching book data...</p>`;
@@ -78,7 +81,7 @@
                 const bookData = await response.json(); // Expecting a list of JSON objects
 
                 // Extract all "Book_id" values from the list
-                const bookIds = bookData
+                bookIds = bookData
                     .filter(item => item.Book_id) // Ensure the object has "Book_id"
                     .map(item => item.Book_id);
 
@@ -100,6 +103,8 @@
         }
 
         async function fetchBookById(bookId) {
+            sessionStorage.setItem('bookId', bookId);
+            updateEbookTitle(bookId);
             document.getElementById('displayArea').innerHTML = `<p class='text-gray-700'>Fetching book data...</p>`;
 
             try {
@@ -118,6 +123,8 @@
 
         async function searchBook() {
             const query = document.getElementById('search').value.trim();
+            sessionStorage.setItem('bookId', query);
+            updateEbookTitle(query);
             if (!query) return alert('Enter a search term');
 
             try {
@@ -130,12 +137,24 @@
         }
 
         function showText() {
-            document.getElementById('displayArea').innerHTML = '<p class="text-gray-700">Displaying full book text...</p>';
+            const bookId = sessionStorage.getItem('bookId');
+            if (bookId) {
+                console.log("Using stored bookId from sessionStorage:", bookId);
+                // Use storedBookId here...
+            } else {
+                return alert("Enter a valid Book ID!");
+            }
+            fetchBookById(bookId)
         }
 
         async function analyzeText(type) {
-            const bookId = document.getElementById('bookId').value.trim();
-            if (!bookId) return alert("Enter a valid Book ID!");
+            const bookId = sessionStorage.getItem('bookId');
+            if (bookId) {
+                console.log("Using stored bookId from sessionStorage:", bookId);
+                // Use storedBookId here...
+            } else {
+                return alert("Enter a valid Book ID!");
+            }
 
             document.getElementById('displayArea').innerHTML = `<p class='text-gray-700'>Analyzing book for ${type}...</p>`;
 
@@ -146,6 +165,7 @@
                     body: JSON.stringify({ bookId, type })
                 });
                 const data = await response.json();
+                console.log(data);
 
                 document.getElementById('displayArea').innerHTML = `<p class='text-gray-700'>${data.result}</p>`;
             } catch (error) {
