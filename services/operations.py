@@ -5,8 +5,15 @@ import re
 from collections import defaultdict
 
 def ebook_analysis_to_html(row):
-    """Converts an ebook_analysis row into a styled Tailwind HTML string."""
-    
+    """
+    Converts an ebook_analysis row into a styled Tailwind HTML string.
+
+    Parameters:
+    row (sqlite3.Row): A row from the ebook_analysis table.
+
+    Returns:
+    str: A string containing the styled HTML for the ebook details.
+    """
     if not row:
         return """<div class="text-red-600 font-semibold p-4">No data found for the given Book ID.</div>"""
 
@@ -48,19 +55,27 @@ def ebook_analysis_to_html(row):
         </div>
     </div>
     """
-    
+
     return html_content
 
+
 def json_to_html_table(json_data):
-    """Converts JSON data to an HTML table with Tailwind CSS."""
-    
+    """
+    Converts JSON data to an HTML table with Tailwind CSS.
+
+    Parameters:
+    json_data (dict): A dictionary containing the JSON data to be converted into an HTML table.
+
+    Returns:
+    str: A string representing the HTML code for the table.
+    """
     table_html = """
         <div class="max-w-2xl w-full bg-white shadow-lg rounded-lg p-6">
             <h2 class="text-2xl font-bold text-gray-700 mb-4">EBook Meta Data</h2>
             <table class="w-full border border-gray-300 rounded-lg">
                 <tbody>
     """
-    
+
     for key, value in json_data.items():
         table_html += f"""
         <tr class="border-b border-gray-200">
@@ -74,17 +89,15 @@ def json_to_html_table(json_data):
             </table>
         </div>
     """
-    
+
     return table_html
+
 
 # Database connection function
 def get_db_connection():
     connection = sqlite3.connect("database.db")
     connection.row_factory = sqlite3.Row
     return connection
-
-import sqlite3
-import json
 
 def create_database():
     """Creates the ebook_analysis table if it doesn't exist."""

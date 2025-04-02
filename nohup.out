@@ -1,0 +1,263 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
+127.0.0.1 - - [03/Apr/2025 00:03:16] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [03/Apr/2025 00:03:16] "GET /get_all_ebooks HTTP/1.1" 200 -
+127.0.0.1 - - [03/Apr/2025 00:03:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [03/Apr/2025 00:03:31] "GET /get_all_ebooks HTTP/1.1" 200 -
+127.0.0.1 - - [03/Apr/2025 00:03:39] "GET /fetch_book?bookId=123 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Apr/2025 00:03:41] "GET /get_all_ebooks HTTP/1.1" 200 -
+127.0.0.1 - - [03/Apr/2025 00:03:44] "GET /fetch_book?bookId=123 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Apr/2025 00:03:44] "POST /analyze HTTP/1.1" 200 -
+[]
+[]
+bookid 123
+{'Author': 'Burroughs, Edgar Rice, 1875-1950', 'Title': "At the Earth's Core", 'Note': 'Pellucidar', 'Credits': 'Judith Boss', 'Language': 'English', 'LoC Class': 'PS: Language and Literatures: American and Canadian literature', 'Subject': 'Earth (Planet) -- Core -- Fiction', 'Category': 'Text', 'EBook-No.': '123', 'Release Date': 'Apr 1, 1994', 'Most Recently Updated': 'Jul 13, 2023', 'Copyright Status': 'Public domain in the USA.', 'Downloads': '666 downloads in the last 30 days.'}
+['https://www.gutenberg.org/files/123/123-0.txt', 'https://www.gutenberg.org/files/123/123.txt']
+https://www.gutenberg.org/files/123/123-0.txt
+uploads/123.txt
+Ebook data inserted successfully!
+Record created with ebook_id=123, status='In Progress'
+Record with ebook_id=123 already exists.
+```
+{
+  "summary": "The story begins with the narrator meeting a man named David Innes, who tells him about his journey to the Earth's core. Innes was born in Connecticut and inherited his father's mine after his death. He became interested in a mechanical subterranean prospector invented by a man named Perry and invested in its construction. The prospector is a steel cylinder with a revolving drill that can turn and twist through solid rock.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["David Innes", "Perry", "The narrator"],
+  "themes": ["adventure", "exploration", "science fiction"]
+}
+```
+```
+{
+  "summary": "The narrator recalls the night they tested Abner Perry's invention, the iron mole, a machine designed to dig through the Earth. As they began their journey, the machine malfunctioned, and they found themselves unable to change direction, heading straight towards death. The narrator and Perry tried to adjust the steering wheel, but it wouldn't budge. In the face of death, Perry, a devoutly religious man, surprisingly let out a stream of profanity instead of praying.",
+  "sentiment": "Neutral",
+  "language": "English",
+  "key_characters": ["Abner Perry", "The Narrator"],
+  "themes": ["Adventure", "Science", "Religion", "Human Nature"]
+}
+```
+[{'Book_id': '123'}]
+```
+{
+  "summary": "The narrator meets a man named Ja, a Mezop from the islands of Pellucidar, who explains his people's way of life, including their skills as fishermen, hunters, and warriors. Ja discusses the history of the Mezops and their relationship with the Mahars, a dominant species in Pellucidar. The narrator is impressed by Ja's physical appearance and language skills, and they hide their canoe to avoid detection by the Mezops of Luana, with whom Ja's tribe is at war.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["Ja", "the narrator"],
+  "themes": ["exploration", "cultural exchange", "conflict"]
+}
+```
+```
+{
+  "summary": "The narrator is taken by a Sagoth to face the Mahars, who are skeptical of his story about the outer earth and his journey to Pellucidar. He is sentenced to the experimental pits for insulting the Mahars' intelligence. The narrator is chained in a room where vivisection is being performed on a human, and he realizes he will be next. He tries to escape by reaching for a dropped surgical instrument, but it is just out of his reach.",
+  "sentiment": "negative",
+  "language": "English",
+  "key_characters": ["The Narrator", "Perry", "The Mahars", "The Sagoth", "Dian the Beautiful", "Ghak"],
+  "themes": ["Survival", "Captivity", "Science vs. Superstition", "Humanity vs. Barbarism"]
+}
+```
+```
+{
+  "summary": "The narrator and Ja explore a temple in Pellucidar, discovering a hidden entrance and observing the Mahars and their human slaves. The queen Mahar leads a procession, and the narrator witnesses the queen's hypnotic control over a human victim, a plump young maiden, who is eventually entranced by the reptile's gaze.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["Ja", "The Narrator", "The Queen Mahar"],
+  "themes": ["Exploration", "Control", "Hypnosis"]
+}
+```
+Record with ebook_id=123 already exists.
+Record with ebook_id=123 already exists.
+```
+{
+  "summary": "The narrator describes a chaotic scene in an amphitheater where a blind bull is loose, causing panic among the crowd. The narrator, along with Perry and Ghak, becomes separated in the chaos and takes advantage of the situation to escape. The narrator finds a narrow aperture leading to a dark corridor and makes their way through it, eventually finding a flight of steps that leads to the surface. Once outside, the narrator sees the plain of Phutra and decides to head towards the distant hills in search of sanctuary. Along the way, the narrator reflects on the unique properties of the inner world, including the reduced gravity, which seems to allow for greater speed and agility.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["narrator", "Perry", "Ghak"],
+  "themes": ["escape", "freedom", "survival", "adventure"]
+}
+```
+```
+{
+  "summary": "The story begins with the narrator meeting a man named David Innes, who tells him about his journey to the Earth's core. David was born in Connecticut and inherited his father's mining business. He became interested in a mechanical subterranean prospector invented by a man named Perry and invested in its construction. The prospector is a steel cylinder that can drill through solid rock. David's story is about to unfold, revealing his adventures and experiences in the inner world.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["David Innes", "Perry"],
+  "themes": ["adventure", "exploration", "science fiction"]
+}
+```
+```
+{
+  "summary": "The narrator escapes from a copper-colored native by paddling a primitive craft out to sea, but the native pursues him. A sea serpent attacks the native, and the narrator intervenes, saving the native's life by spearing the serpent. The native, though initially hostile, spares the narrator's life and they communicate in a common language, leading to a tentative truce.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["The Narrator", "The Copper-Colored Native"],
+  "themes": ["Survival", "Redemption", "Communication"]
+}
+```
+```
+{
+  "summary": "The narrator recounts the story of Abner Perry's invention, the 'iron mole', a machine designed to dig through the Earth. During its first test, the machine malfunctions, and Perry and the narrator are unable to control its descent. Despite Perry's initial calm and prayerful demeanor, he becomes frantic and profane as they face imminent death. The narrator is shocked by Perry's transformation, expecting him to pray instead of curse.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["Abner Perry", "The Narrator"],
+  "themes": ["Invention", "Adventure", "Mortality", "Human Nature"]
+}
+```
+```
+{
+  "summary": "The story revolves around David and Perry, who are determined to escape from the Mahars and take with them the secret of a chemical formula that can fertilize eggs, which could benefit the human race in Pellucidar. They plan to use this knowledge to reclaim the world and lead the human race out of ignorance and into civilization. However, their plan is put to a test as they encounter hurrying bands of slaves and Sagoth guards, and they are forced to join the line of marching humans, who are on their way to witness the punishment of two escaped slaves.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["David", "Perry", "Ghak"],
+  "themes": ["escape", "civilization", "reclamation", "survival"]
+}
+```
+127.0.0.1 - - [03/Apr/2025 00:03:47] "POST /analyze HTTP/1.1" 200 -
+127.0.0.1 - - [03/Apr/2025 00:03:48] "POST /analyze HTTP/1.1" 200 -
+127.0.0.1 - - [03/Apr/2025 00:03:50] "GET /fetch_book?bookId=123 HTTP/1.1" 200 -
+Exception in thread Thread-10 (process_analysis):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/server/workspace/project/services/gutenberg_ebook.py", line 122, in process_analysis
+    summary=final_analysis.get("summary", ""),
+            ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+127.0.0.1 - - [03/Apr/2025 00:03:55] "POST /analyze HTTP/1.1" 200 -
+ * Detected change in '/home/server/workspace/project/services/gutenberg_ebook.py', reloading
+```
+{
+  "summary": "The text describes a horrific scene where a Mahar queen, a reptilian creature, hypnotizes a girl and leads her into the water, where she is eventually dismembered and devoured. The Mahar queen repeats this process with other slaves, while the male slaves are later attacked and killed by thipdars, flying creatures. The Mahars and thipdars then fall asleep, and the narrator discusses the unusual behavior of the Mahars in this temple with his companion Ja.",
+  "sentiment": "negative",
+  "language": "English",
+  "key_characters": ["The Mahar queen", "The girl", "The narrator", "Ja"],
+  "themes": ["horror", "hypnosis", "cannibalism", "brutality"]
+}
+```
+```
+{
+  "summary": "The narrator, David Innes, recounts his journey with his love Dian in the iron prospector, a vehicle that can travel through the Earth's crust. However, their journey is sabotaged by Hooja, who replaces Dian with a Mahar, a reptilian creature. David Innes is left stranded in the Sahara Desert, separated from Dian, and is unsure if he will ever find his way back to her in the inner world of Pellucidar.",
+  "sentiment": "negative",
+  "language": "English",
+  "key_characters": ["David Innes", "Dian", "Hooja", "Perry"],
+  "themes": ["love", "betrayal", "adventure", "separation"]
+}
+```
+```
+{
+  "summary": "The narrator is being chased by a monster called a sithic and is helped by Ja, a native of the land, who uses a spear to try and save him. The narrator climbs the spear but it is pulled out of Ja's hands and the narrator falls onto the sithic's back, managing to escape by rolling off and running away. Ja explains that he helped the narrator because the narrator had previously saved his life and it was his duty as a Mezop to protect and befriend him.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["narrator", "Ja", "sithic"],
+  "themes": ["survival", "friendship", "duty"]
+}
+```
+```
+{
+  "summary": "The narrator helps his friend David Innes prepare for an expedition to Pellucidar, a fictional inner world, by gathering various supplies and equipment. Innes plans to use a telegraph line to communicate with the outer world. The narrator receives several letters from Innes before he departs, but eventually loses contact. A year later, the narrator returns to the Sahara to search for Innes, but is unable to find him or any sign of his expedition. The narrator is left with many unanswered questions about Innes' fate.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["David Innes", "The Narrator"],
+  "themes": ["Adventure", "Exploration", "Uncertainty"]
+}
+```
+```
+{
+  "summary": "The narrator, after being stranded on an island, sets out to find the beach and eventually discovers a hidden canoe. They use the canoe to reach the mainland, with the goal of returning to Phutra to reunite with friends Perry and Ghak. Along the way, they face challenges and reflect on their decision to attempt to escape alone. The narrator ultimately becomes lost in a canyon but presses on, driven by curiosity, and eventually comes upon a beautiful ocean scene with a narrow plain, strange trees, and a sandy beach.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["narrator", "Perry", "Ghak", "Ja"],
+  "themes": ["survival", "friendship", "exploration", "self-discovery"]
+}
+```
+```
+{
+  "summary": "The narrator is taken by a Sagoth to face the Mahars, who are skeptical of his story about the outer earth and his journey to Pellucidar. He is sentenced to the experimental pits for insulting the Mahars' intelligence. The narrator is chained in a room where vivisection is being performed on a human, and he realizes he will be next. He tries to escape by reaching for a dropped surgical instrument, but it is just out of his reach.",
+  "sentiment": "negative",
+  "language": "English",
+  "key_characters": ["The narrator", "Perry", "The Mahars", "The Sagoth", "Dian the Beautiful", "Ghak"],
+  "themes": ["Survival", "Captivity", "Science vs. Superstition", "Humanity vs. Monstrosity"]
+}
+```
+{'summary': "The story begins with the narrator meeting David Innes, who recounts his journey to the Earth's core. Innes invested in a mechanical subterranean prospector invented by Abner Perry, which malfunctioned, sending them to the inner world of Pellucidar. There, they encountered various species, including the Mezops and the Mahars, and experienced captivity, exploration, and adventure. The narrator and Innes planned to escape and reclaim the world, but their journey was sabotaged, and Innes was left stranded in the Sahara Desert, separated from his love Dian.", 'sentiment': 'neutral', 'language': 'English', 'key_characters': ['David Innes', 'Abner Perry', 'Dian', 'Ja', 'Ghak', 'The Queen Mahar', 'Hooja', 'The Sagoth', 'The Copper-Colored Native'], 'themes': ['exploration', 'captivity', 'science fiction', 'human nature', 'reclamation', 'survival', 'civilization', 'freedom', 'love', 'redemption', 'uncertainty', 'hypnosis', 'adventure', 'escape', 'betrayal', 'communication']}
+Record updated successfully for ebook_id=123
+```
+{
+  "summary": "The narrator falls into a tank of water in a temple while trying to escape from the Mahars, reptilian creatures that eat human flesh. The narrator survives the fall and finds that the Mahars are not present, possibly due to their deafness and the lack of time measurement in Pellucidar. The narrator escapes the temple through a hidden entrance and flees into the jungle, relieved to have escaped the Mahars' clutches. The narrator reflects on the horrors of being in the Mahars' power and the strange contradictions of time in Pellucidar.",
+  "sentiment": "negative",
+  "language": "English",
+  "key_characters": ["narrator", "Ja"],
+  "themes": ["survival", "horror", "time perception"]
+}
+```
+Record with ebook_id=123 already exists.
+```
+{
+  "summary": "The narrator escapes from a copper-colored man in a primitive craft, but the man is then attacked by a sea serpent. The narrator intervenes, saving the man's life by killing the serpent with a spear. The two then engage in a standoff, but eventually communicate in a common language and the copper-colored man releases his hold on the spear, grateful for the narrator's actions.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["The Narrator", "The Copper-Colored Man"],
+  "themes": ["Survival", "Gratitude", "Communication"]
+}
+```
+```
+{
+  "summary": "The narrator, David Innes, recounts his journey with Dian in the iron prospector, a vehicle that can travel through the Earth's crust. However, their trip is sabotaged by Hooja, who replaces Dian with a Mahar, a reptilian creature. David Innes discovers the trick and is left stranded in the Sahara Desert, separated from Dian and Pellucidar. He waits for months, hoping to find a way back to his lost love, and eventually shares his story with the narrator, who verifies the existence of the prospector.",
+  "sentiment": "negative",
+  "language": "English",
+  "key_characters": ["David Innes", "Dian", "Hooja", "Perry"],
+  "themes": ["love", "betrayal", "adventure", "separation"]
+}
+```
+```
+{
+  "summary": "The narrator helps his friend David Innes prepare for an expedition to Pellucidar, a world inside the Earth, by sending him a large quantity of supplies, including books, tools, and wire for a telegraph line. Innes plans to use the supplies to recreate the wonders of the 20th century in the Stone Age. The narrator receives several letters from Innes, who faces threats from Arabs and eventually sets out on his journey. A year later, the narrator returns to the Sahara to search for Innes, but is unable to find him or any sign of his expedition, leaving many questions about Innes' fate unanswered.",
+  "sentiment": "neutral",
+  "language": "English",
+  "key_characters": ["David Innes", "The Narrator"],
+  "themes": ["Adventure", "Exploration", "Uncertainty"]
+}
+```
+None
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
+ * Detected change in '/home/server/workspace/project/services/gutenberg_ebook.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
+ * Detected change in '/home/server/workspace/project/services/gutenberg_ebook.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
+ * Detected change in '/home/server/workspace/project/services/gutenberg_ebook.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
+ * Detected change in '/home/server/workspace/project/services/gutenberg_ebook.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
+ * Detected change in '/home/server/workspace/project/services/gutenberg_ebook.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
+ * Detected change in '/home/server/workspace/project/services/operations.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
+ * Detected change in '/home/server/workspace/project/services/operations.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
+ * Detected change in '/home/server/workspace/project/services/operations.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 116-990-189
