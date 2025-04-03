@@ -184,7 +184,9 @@ def process_analysis(file_path, book_id):
         return data
     insert_ebook(book_id)
     chunk = chunk_text(text, max_length=5000)
+    print("chunk len", len(chunk))
     selected_chunks = select_chunks(chunk, num_samples=10)
+    print("selected_chunks len", len(selected_chunks))
     client=getGroqClient()
     summary = process_raw_analysis(client, selected_chunks)
     merged_output = merge_responses(summary)
