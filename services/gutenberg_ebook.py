@@ -195,6 +195,7 @@ def process_analysis(file_path, book_id):
     raw_json_output = process_final_analysis(merged_output, client)
     print("raw_json_output", raw_json_output)
     final_analysis = extract_json(raw_json_output)
+    print("final_analysis", final_analysis)
     # print(final_analysis)
     try:
         update_ebook_data(

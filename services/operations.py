@@ -341,7 +341,7 @@ def process_raw_analysis(client, selected_chunks):
             model="llama-3.3-70b-versatile",
             temperature=0.5
         )
-        print(chat_completion.choices[0].message.content)
+        # print(chat_completion.choices[0].message.content)
         summary.append(chat_completion.choices[0].message.content)
     return summary
 
