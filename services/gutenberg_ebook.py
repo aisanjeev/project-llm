@@ -179,6 +179,7 @@ def process_analysis(file_path, book_id):
     insert_ebook(book_id)
     chunk = chunk_text(text, max_length=5000)
     selected_chunks = select_chunks(chunk, num_samples=10)
+
     client = Groq(
         api_key=os.getenv('API_KEY'),
     )
@@ -187,14 +188,25 @@ def process_analysis(file_path, book_id):
     raw_json_output = process_final_analysis(merged_output, client)
     final_analysis = extract_json(raw_json_output)
     print(final_analysis)
-    update_ebook_data(
-        ebook_id=book_id,
-        summary=final_analysis.get("summary", ""),
-        sentiment=final_analysis.get("sentiment", ""),
-        language=final_analysis.get("language", ""),
-        key_characters=final_analysis.get("key_characters", ""),
-        themes=final_analysis.get("key_characters", "themes"),
-        status="Analysis Completed"
-    )
+    try:
+        update_ebook_data(
+            ebook_id=book_id,
+            summary=final_analysis.get("summary", ""),
+            sentiment=final_analysis.get("sentiment", ""),
+            language=final_analysis.get("language", ""),
+            key_characters=final_analysis.get("key_characters", ""),
+            themes=final_analysis.get("key_characters", "themes"),
+            status="Analysis Completed"
+        )
+    except Exception as e:
+        update_ebook_data(
+            ebook_id=book_id,
+            summary="",
+            sentiment="",
+            language="",
+            key_characters="",
+            themes="",
+            status="Analysis Failed"
+        )
     return True
 
