@@ -191,9 +191,11 @@ def process_analysis(file_path, book_id):
     summary = process_raw_analysis(client, selected_chunks)
     merged_output = merge_responses(summary)
     client=getGroqClient()
+    print("merged_output", merged_output)
     raw_json_output = process_final_analysis(merged_output, client)
+    print("raw_json_output", raw_json_output)
     final_analysis = extract_json(raw_json_output)
-    print(final_analysis)
+    # print(final_analysis)
     try:
         update_ebook_data(
             ebook_id=book_id,
