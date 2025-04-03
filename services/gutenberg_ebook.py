@@ -7,6 +7,12 @@ from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
+
+def getGroqClient():
+    client = Groq(
+        api_key=os.getenv('API_KEY'),
+    )
+    return client
 def scrape_gutenberg_metadata(book_id):
     """
     Scrape metadata from a Project Gutenberg eBook page.
@@ -179,12 +185,10 @@ def process_analysis(file_path, book_id):
     insert_ebook(book_id)
     chunk = chunk_text(text, max_length=5000)
     selected_chunks = select_chunks(chunk, num_samples=10)
-
-    client = Groq(
-        api_key=os.getenv('API_KEY'),
-    )
+    client=getGroqClient()
     summary = process_raw_analysis(client, selected_chunks)
     merged_output = merge_responses(summary)
+    client=getGroqClient()
     raw_json_output = process_final_analysis(merged_output, client)
     final_analysis = extract_json(raw_json_output)
     print(final_analysis)
